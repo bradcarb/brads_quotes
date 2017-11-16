@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <header><span><a href="/home">Home</a><a href="/logout">Logout</a></span></header>
+    {% for user in users %}
+    <p>Posts by {user.id}</p>
+    <p>Count: { num_posts }</p>
+    <p id="user quotes"> { quotes }</p>
+    {% endfor %}
+
+</body>
+</html>

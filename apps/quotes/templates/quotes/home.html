@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <style>
+    body{
+        padding-left: 40px;
+    }
+    h1 span{
+        font-size: 14pt;
+        margin-left: 30%;
+    }
+    
+    h2{
+        margin-top: 40px;
+    }
+    #left{
+        display: inline-block;
+    }
+    #left p{
+        overflow-y: scroll;
+        border: 2px solid black;
+        height: 600px;
+        width: 400px;
+    }
+    
+    #right{
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 30%;
+    }
+    #favorite_quotes{
+        overflow-y: scroll;
+        border: 2px solid black;
+        height: 400px;
+        width: 400px;
+    }
+    #quote_box{
+        height: 150px;
+        width: 200px;
+    }
+    
+    </style>
+</head>
+<body>
+
+    <h1>Welcome {{ user.name }}!<span><a href="/logout">Logout</a></span></h1>
+    <div id="left">
+        <h2>Quotable Quotes</h2>
+        {% for quote in all_quotes %}
+            <p>{{ quote.quoter }}: {{ quote.quote }}
+                    Posted by: {{ quote.submitter_id }}
+            </p>
+        {% endfor %}
+        
+    </div>
+    <div id="right">
+        <h2>Your Favorites</h2>
+        <p id="favorite_quotes">{{ quotes }}</p>
+        <div id="contribute">
+            <h2>Contribute a Quote</h2>
+            <form action="quote" method="post">
+                {% csrf_token %}
+                <p>Quoted By: <input type="text" name="quoter"></p>
+                <p>Quote: <input type="text" id="quote_box" name="quote"></p>
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+            <input type="submit" name="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

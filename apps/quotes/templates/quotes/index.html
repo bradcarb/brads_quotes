@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brad's Book Reviews</title>
+    <style>
+    body{
+        padding: 50px;
+    }
+    #register_wrapper{
+        display: inline-block;
+    }
+    #login_wrapper{
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 100px;
+    }
+    #messages{
+        color: red;
+        font-weight: bold;
+    }
+   
+    </style>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <div id="register_wrapper">
+        <form action="/register" method="post">
+            {% csrf_token %}
+            <p>Name: <input type="text" name="name"></p>
+            <p>Username: <input type="text" name="username"></p>
+            <p>Email: <input type="email" name="email"></p>
+            <p>Password: <input type="text" name="password"></p>
+            <p id="criteria">Password must be at least 8 characters and contain at least 1 number</p>
+            <p>Confirm Password: <input type="text" name="confirm_password"></p>
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p id="messages">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <input type="submit" id="register" value="Register">
+        </form>
+    </div>
+    <div id="login_wrapper">
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <p>Email: <input type="email" name="email"></p>
+            <p>Password: <input type="text" name="password"></p>
+            <div class="messages">
+                <p id="message">{{ message }}</p>
+            </div>            
+            <input type="submit" id="login" value="Login">
+        </form>
+    </div>
+    
+</body>
+</html>
